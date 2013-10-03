@@ -1,5 +1,6 @@
 import re
 import subprocess
+import socket
 
 def ipaddress():
   p = subprocess.Popen(["/sbin/ip","addr","show"], stdout=subprocess.PIPE)
