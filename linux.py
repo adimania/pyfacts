@@ -5,7 +5,7 @@ def ipaddress():
   p = subprocess.Popen(["/sbin/ip","addr","show"], stdout=subprocess.PIPE)
   ip=p.communicate()
   pattern = re.compile(r'inet\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
-  return pattern.findall(ifconfig[0])
+  return pattern.findall(ip[0])
 
 def fqdn():
   return socket.gethostname()
