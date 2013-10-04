@@ -26,5 +26,11 @@ def memory():
 def cpu_cores():
   return profiler_hardware_datatype()['Total Number of Cores']
 
+def os():
+  return subprocess.Popen(["sw_vers"], stdout=subprocess.PIPE).communicate()[0].split('\n')[0].split('\t')[1]
+
+def os_version():
+  return subprocess.Popen(["sw_vers"], stdout=subprocess.PIPE).communicate()[0].split('\n')[1].split('\t')[1]
+
 #def cpu_threads():
 #  return profiler_hardware_datatype()['Memory']
