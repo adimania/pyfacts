@@ -32,5 +32,14 @@ def os():
 def os_version():
   return subprocess.Popen(["sw_vers"], stdout=subprocess.PIPE).communicate()[0].split('\n')[1].split('\t')[1]
 
+def processor_speed():
+  return profiler_hardware_datatype()['Processor Speed']
+
+def cpu_type():
+  return profiler_hardware_datatype()['Processor Name']
+
+def serial_number():
+  return profiler_hardware_datatype()['Serial Number (system)']
+
 #def cpu_threads():
 #  return profiler_hardware_datatype()['Memory']
