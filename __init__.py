@@ -17,7 +17,13 @@ facts={}
 for method in dir(FactsLib):
   if method[0] != '_' and type(getattr(FactsLib,method)) is not ModuleType:
     facts[str(method)] = getattr(FactsLib,method)()
-print facts
+try:
+  custom_facts=open('custom_facts')
+  for f in custom_facts:
+    f=f.split(':')
+    facts[f[0]]=f[1]
+except:
+  pass
 
 try:
   if sys.argv[1]:
