@@ -8,6 +8,27 @@ def ipaddress():
   pattern=re.compile(r'inet\s*(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
   return pattern.findall(ip[0])
 
+def private_ip():
+  ips=[]
+  p=subprocess.Popen(["/sbin/ifconfig"],stdout=subprocess.PIPE)
+  ip=p.communicate()
+  pattern=re.compile(r'inet\s*(192\.168\.\d{1,3}\.\d{1,3})')
+  ips.extend(pattern.findall(ip[0]))
+  pattern=re.compile(r'inet\s*(10\.\d{1,3}\.\d{1,3}\.\d{1,3})')
+  ips.extend(pattern.findall(ip[0]))
+  pattern=re.compile(r'inet\s*(127\.\d{1,3}\.\d{1,3}\.\d{1,3})')
+  ips.extend(pattern.findall(ip[0]))
+  pattern=re.compile(r'inet\s*(172\.(1[6-9]|2[0-9]|3[0-1])\.\d{1,3}\.\d{1,3})')
+  for ip_data in pattern.findall(ip[0]):
+    ips.append(ip_data[0])
+  return ips
+
+def public_ip():
+  return list(set(ipaddress())-set(private_ip))
+
+def private_ip():
+  return
+
 def fqdn():
   return socket.gethostname()
 
