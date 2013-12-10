@@ -26,9 +26,6 @@ def private_ip():
 def public_ip():
   return list(set(ipaddress())-set(private_ip()))
 
-def private_ip():
-  return
-
 def fqdn():
   return socket.gethostname()
 
