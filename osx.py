@@ -24,7 +24,7 @@ def private_ip():
   return ips
 
 def public_ip():
-  return list(set(ipaddress())-set(private_ip))
+  return list(set(ipaddress())-set(private_ip()))
 
 def private_ip():
   return
