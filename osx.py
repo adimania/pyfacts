@@ -42,7 +42,10 @@ def memory():
 #def swap():
 
 def cpu_cores():
-  return profiler_hardware_datatype()['Total Number of Cores']
+  try:
+    return profiler_hardware_datatype()['Total Number of Cores']
+  except: 
+    return profiler_hardware_datatype()['Total Number Of Cores']
 
 def os():
   return subprocess.Popen(["sw_vers"], stdout=subprocess.PIPE).communicate()[0].split('\n')[0].split('\t')[1]
