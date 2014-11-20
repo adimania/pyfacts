@@ -1,14 +1,16 @@
 import json 
-import platform
+import os
 from types import ModuleType
 import sys
 import urllib
 import urllib2
 
-if platform.system().lower() == 'linux':
+if os.uname()[0].lower() == 'linux':
   import linux as FactsLib
-elif platform.system().lower() == 'darwin':
+elif os.uname()[0].lower() == 'darwin':
   import osx as FactsLib
+elif os.uname()[0].lower() == 'vmkernel':
+  import esxi as FactsLib
 else:
   print "OS not supprted"
   sys.exit(0)
