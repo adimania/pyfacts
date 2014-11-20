@@ -4,6 +4,7 @@ from types import ModuleType
 import sys
 import urllib
 import urllib2
+import datetime
 
 if os.uname()[0].lower() == 'linux':
   import linux as FactsLib
@@ -19,11 +20,12 @@ facts={}
 for method in dir(FactsLib):
   if method[0] != '_' and type(getattr(FactsLib,method)) is not ModuleType:
     facts[str(method)] = getattr(FactsLib,method)()
+  facts["time"] = str(datetime.datetime.utcnow())
 try:
   custom_facts=open('custom_facts')
   for f in custom_facts:
-    f=f.split(':')
-    facts[f[0]]=f[1]
+    f = f.split(':')
+    facts[f[0]] = f[1]
 except:
   pass
 
@@ -37,4 +39,4 @@ try:
     response = urllib2.urlopen(req)
     the_page = response.read()
 except:
-  pass
+  print json.dumps(facts)
