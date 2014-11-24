@@ -34,9 +34,9 @@ try:
     url = sys.argv[1]
     tmp=json.dumps(facts)
     print tmp
-    facts_json = urllib.urlencode(facts)
-    req = urllib2.Request(url, facts_json)
+    req = urllib2.Request(url, json.dumps(facts))
     response = urllib2.urlopen(req)
     the_page = response.read()
-except:
+except Exception as e:
+  print e
   print json.dumps(facts)
