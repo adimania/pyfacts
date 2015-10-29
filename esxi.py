@@ -34,3 +34,10 @@ def cpu_name():
     cpu = p.communicate()
     pattern = re.compile(r'description = "([^"]+)')
     return pattern.findall(cpu[0])[0]
+
+def os_name():
+   p = subprocess.Popen(["esxcli", "system", "version", "get"], stdout=subprocess.PIPE).communicate()[0].split('\n')
+   data_dict = {}
+   for d in p[0:]:
+      data_dict[d.split(':')[0].strip()] = d.split(':')[-1].strip()
+   return data_dict['Product'] + ' ' + data_dict['Build'] + ' ' + data_dict['Version']

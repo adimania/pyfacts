@@ -62,5 +62,8 @@ def cpu_type():
 def serial_number():
   return profiler_hardware_datatype()['Serial Number (system)']
 
+def model():
+  return profiler_hardware_datatype()['Model Name']
+
 #def cpu_threads():
 #  return profiler_hardware_datatype()['Memory']
